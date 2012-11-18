@@ -1,6 +1,6 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -8,21 +8,21 @@ import java.util.ArrayList;
  */
 public class Document {
     
-    private ArrayList<String> terms = new ArrayList<String>();
+    private HashMap<String,Integer> termFrequencies = new HashMap<String,Integer>();
     private boolean isSpam;
 
     /**
      * @return the terms
      */
-    public ArrayList<String> getTerms() {
-        return terms;
+    public HashMap<String,Integer> getTermFrequencies() {
+        return termFrequencies;
     }
 
     /**
      * @param terms the terms to set
      */
-    public void setTerms(ArrayList<String> terms) {
-        this.terms = terms;
+    public void setTermFrequencies(HashMap<String,Integer> freqs) {
+        this.termFrequencies = freqs;
     }
 
     /**
