@@ -28,7 +28,7 @@ public class Document {
     /**
      * @return the isSpam
      */
-    public boolean isIsSpam() {
+    public boolean isSpam() {
         return isSpam;
     }
 
