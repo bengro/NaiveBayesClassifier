@@ -1,7 +1,7 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier.classification;
 
 /**
- *
+ * This class describes how probable it is for a term to belong to either of the classes.
  * @author bengro
  */
 public class Classification {
