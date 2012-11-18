@@ -1,7 +1,11 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier;
 
+import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.CrossValidator;
+import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Document;
+import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.DocumentProcessor;
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,6 +21,7 @@ public class App
      * > Customize > Run
      */
     public static String documentDirectory = "./resources";
+    public static ArrayList<String> customDirectories = new ArrayList();
     public static Path stopwordsPath;
          
     public static void main( String[] args )
@@ -54,11 +59,20 @@ public class App
             }
             
             else if(input.equals("run")) {
-                File dir = new File(documentDirectory);
-                System.out.println(dir.listFiles());
-                for (File child : dir.listFiles()) {
-                    // Print all subdirectories
-                    System.out.println(child);
+                // just use the specified test set; each folder is a bucket
+                if (customDirectories.isEmpty()) {
+                    //CrossValidator cv = new CrossValidator();
+                    File dir = new File(documentDirectory);
+                    File[] subdirs = dir.listFiles();
+
+                    for (File subdir : subdirs) {
+                        if (subdir.isDirectory()) {
+                            ArrayList<Document> bucket = DocumentProcessor.process(subdir.listFiles());
+                            //cv.addBucket(bucket);
+                        }
+                    }
+                } else {
+                    // break things up evenly
                 }
             }
         }
