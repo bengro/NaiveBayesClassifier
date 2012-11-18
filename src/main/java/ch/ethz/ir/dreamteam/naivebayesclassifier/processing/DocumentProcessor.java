@@ -25,6 +25,7 @@ public class DocumentProcessor {
      */
     public static ArrayList<Document> process(File[] files) {
         ArrayList<Document> processedDocuments = new ArrayList();
+
         for (File file : files) {
             Document d = new Document();
             HashMap<String, Integer> termFrequencies = new HashMap();
@@ -53,7 +54,9 @@ public class DocumentProcessor {
             }
             
             d.setTermFrequencies(termFrequencies);
+            processedDocuments.add(d);
         }
-        return new ArrayList<Document>();
+        
+        return processedDocuments;
     }
 }
