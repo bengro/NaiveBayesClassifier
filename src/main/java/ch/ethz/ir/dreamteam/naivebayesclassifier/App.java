@@ -5,24 +5,20 @@ import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Document;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.DocumentProcessor;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static boolean STOPWORDS = false;
     public static boolean STEMMING = false;
     
-    /* NETBEANS: To set the working dir, do Run > Set Project Configuration
-     * > Customize > Run
-     */
-    public static String documentDirectory = "./resources";
+    
+    // NETBEANS: To set the working dir, do Run > Set Project Configuration > Customize > Run
+    public static Path documentDirectory = Paths.get("./resources/IR_Project3_Files");
+    public static Path stopwordsPath = Paths.get("./resources/stopwords.txt");
     public static ArrayList<String> customDirectories = new ArrayList();
-    public static Path stopwordsPath;
          
     public static void main( String[] args )
     {
@@ -59,21 +55,24 @@ public class App
             }
             
             else if(input.equals("run")) {
+                CrossValidator cv = new CrossValidator();
+                
                 // just use the specified test set; each folder is a bucket
                 if (customDirectories.isEmpty()) {
-                    //CrossValidator cv = new CrossValidator();
-                    File dir = new File(documentDirectory);
+                    File dir = new File(documentDirectory.toString());
                     File[] subdirs = dir.listFiles();
 
                     for (File subdir : subdirs) {
                         if (subdir.isDirectory()) {
                             ArrayList<Document> bucket = DocumentProcessor.process(subdir.listFiles());
-                            //cv.addBucket(bucket);
+                            cv.addBucket(bucket);
                         }
                     }
                 } else {
-                    // break things up evenly
+                    // TODO: break things up evenly
                 }
+                
+                // TODO: Initiate CrossValidation!
             }
         }
     }

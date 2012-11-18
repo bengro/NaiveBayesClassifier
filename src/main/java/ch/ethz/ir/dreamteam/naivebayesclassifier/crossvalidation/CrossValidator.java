@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * @author bengro
  */
 public class CrossValidator {
-    private ArrayList<ArrayList<Document>> buckets;
+    private ArrayList<ArrayList<Document>> buckets = new ArrayList();
     private ArrayList<Document> trainingSet;
     private ArrayList<Document> testSet;
-
+    
     /**
      * @return the buckets
      */

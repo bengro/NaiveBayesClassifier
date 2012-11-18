@@ -43,7 +43,7 @@ public class DocumentProcessor {
                 try {
                     Charset charset = Charset.forName("US-ASCII");
                     BufferedReader reader = Files.newBufferedReader(file.toPath(), charset);
-                    String line = null;
+                    String line;
 
                     while ((line = reader.readLine()) != null) {
                         termFrequencies.putAll(t.tokenizeLine(line));
