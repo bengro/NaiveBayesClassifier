@@ -15,7 +15,7 @@ public class App
     /* NETBEANS: To set the working dir, do Run > Set Project Configuration
      * > Customize > Run
      */
-    public static String documentDirectory = "IR_Project3_Files";
+    public static String documentDirectory = "./resources";
             
     public static void main( String[] args )
     {
