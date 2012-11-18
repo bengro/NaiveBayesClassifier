@@ -1,6 +1,7 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
@@ -15,8 +16,9 @@ public class App
     /* NETBEANS: To set the working dir, do Run > Set Project Configuration
      * > Customize > Run
      */
-    public static String documentDirectory = "./resources";
-            
+    public static String documentDirectory = "IR_Project3_Files";
+    public static Path stopwordsPath;
+         
     public static void main( String[] args )
     {
         Scanner in = new Scanner(System.in);
