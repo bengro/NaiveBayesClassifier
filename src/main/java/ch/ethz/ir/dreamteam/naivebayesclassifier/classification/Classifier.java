@@ -171,7 +171,7 @@ public class Classifier {
         double enumerator;
                 
         // posterior P(term | C = spam) = T_spam/term + 1 / sum_t(T_spam/term) + vocabSize
-        // it can be that th term is not in the class vocabulary, therefore this check:
+        // it can be that the term is not in the class vocabulary, therefore this check:
         if(spamTerms.containsKey(term.getKey())) {
             enumerator = spamTerms.get(term.getKey());
         } else {
