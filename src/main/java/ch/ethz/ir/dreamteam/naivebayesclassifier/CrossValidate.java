@@ -14,9 +14,9 @@ public class CrossValidate {
         this.n = n;
     }
     
-    public Parameters train() {
+    /*public Parameters train() {
         return 0;
-    }
+    }*/
     
     public void test() {
         
