@@ -15,32 +15,32 @@ public class Runner {
     /**
      * In case we need to know which documents were considered later - we should not.
      */
-    Fold fold;
+    private Fold fold;
     
     /**
      * Contains model trained during training.
      */
-    Model model;
+    private Model model;
     
     /**
      * True Positives
      */
-    int TP;
+    private int TP;
     
     /**
      * True Negatives
      */
-    int TN;
+    private int TN;
            
     /**
      * False Positives
      */
-    int FP;
+    private int FP;
     
     /**
      * False Negatives
      */
-    int FN;
+    private int FN;
     
     
     /**
@@ -85,5 +85,49 @@ public class Runner {
         }
 
     }
+
+    /**
+     * @return the fold
+     */
+    public Fold getFold() {
+        return fold;
+    }
+
+    /**
+     * @return the model
+     */
+    public Model getModel() {
+        return model;
+    }
+
+    /**
+     * @return the TP
+     */
+    public int getTP() {
+        return TP;
+    }
+
+    /**
+     * @return the TN
+     */
+    public int getTN() {
+        return TN;
+    }
+
+    /**
+     * @return the FP
+     */
+    public int getFP() {
+        return FP;
+    }
+
+    /**
+     * @return the FN
+     */
+    public int getFN() {
+        return FN;
+    }
+    
+    
     
 }
