@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.ethz.ir.dreamteam.naivebayesclassifier;
 
 import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Fold;
@@ -42,7 +38,7 @@ public class Evaluator {
             File file = new File(path);
 
             String graphTitle = "ROC";
-            XYSeries series = new XYSeries("ROC");
+            XYSeries series = new XYSeries("ROC Curve for all Tests");
             
             file.createNewFile();
             FileWriter fstream = new FileWriter(path);
@@ -65,9 +61,9 @@ public class Evaluator {
                 Double recall = (double) tp / (tp + fn);
                 
                 // buffer to write to file/stdout
-                output = output.concat("\nRun " + i + "\n");
+                output = output.concat("\nRun " + (i + 1) + "\n");
                 output = output.concat("------\n");
-                output = output.concat("Training set size: " + trainingSize + "(" + markedAsSpam + " spam, " + markedAsNoSpam + " correct)\n");
+                output = output.concat("Training set size: " + trainingSize + " (" + markedAsSpam + " spam, " + markedAsNoSpam + " correct)\n");
                 output = output.concat("Spam prior: " + spamPrior + "\n");
                 output = output.concat("Correct prior: " + noSpamPrior + "\n");
                 output = output.concat("True positives: " + tp + "\n");
@@ -78,7 +74,7 @@ public class Evaluator {
                 output = output.concat("Recall: " + recall + "\n");
                 
                 // add plot points: (false positive rate, true positive rate)
-                series.add((double) fp / (tp + fn), (double) tp / (tp + fn));
+                series.add((double) fp / (tn + fn), (double) tp / (tp + fp));
             }
 
             out.write(output);
@@ -123,8 +119,8 @@ class XYChart extends JFrame {
 
         final JFreeChart chart = ChartFactory.createXYLineChart(
             title,      // chart title
-            "Recall",                      // x axis label
-            "Precision",                      // y axis label
+            "False Positive Rate",                      // x axis label
+            "True Positive Rate",                      // y axis label
             dataset,                  // data
             PlotOrientation.VERTICAL,
             false,                     // include legend
