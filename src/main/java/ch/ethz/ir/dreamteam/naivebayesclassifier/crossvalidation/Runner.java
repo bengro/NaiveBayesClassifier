@@ -4,6 +4,7 @@ import ch.ethz.ir.dreamteam.naivebayesclassifier.classification.Classifier;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.classification.Model;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.Document;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 /**
  * This class is responsible for executing training and testing for a given fold.
@@ -72,11 +73,36 @@ public class Runner {
         
         for(Document testDoc : testDocs) {
             
+            double posteriorSumSpam = 0.0;
+            double posteriorSumNoSpam = 0.0;
+            
+            for(Entry<String, Integer> term : testDoc.getTermFrequencies().entrySet()) {
+                
+                // look up probabilty for term | spam
+                double spamProbTerm = model.getTermProbabilities().get(term.getKey()).getSpamProbability();
+                double logSpamProbTerm = Math.log(spamProbTerm) * term.getValue();
+                posteriorSumSpam = posteriorSumSpam + logSpamProbTerm;
+                
+                // look up probabilty for term | nospam
+                double noSpamProbTerm = model.getTermProbabilities().get(term.getKey()).getNoSpamProbability();
+                double logNoSpamProbTerm = Math.log(noSpamProbTerm) * term.getValue();
+                posteriorSumNoSpam = posteriorSumSpam + logNoSpamProbTerm;
+                
+             }
+            
             // our prediction for P(spam|doc)
+            double isSpamProbability = Math.log(model.getSpamPrior()) + posteriorSumSpam;
             
             // our prediction for P(noSpam|doc)
+            double isNoSpamProbability = Math.log(model.getNoSpamPrior()) + posteriorSumNoSpam;
             
             // our final prediction
+            boolean isSpamPrediction;
+            if(isSpamProbability < isNoSpamProbability) {
+                isSpamPrediction = false;
+            } else {
+                isSpamPrediction = true;
+            }
             
             // effective class
         
