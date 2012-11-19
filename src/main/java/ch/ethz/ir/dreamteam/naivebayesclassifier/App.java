@@ -103,6 +103,7 @@ public class App
     
     /**
      * sets the directories for queries and relevancy list.
+     * TODO: Walk the custom directory
      * @param input 
      */
     public static void updatePaths(String input) {

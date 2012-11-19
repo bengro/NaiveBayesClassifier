@@ -61,8 +61,8 @@ public class CrossValidator {
             runs.add(run);
         }
         
-        // evaluation either right here or in another class.
         Evaluator evaluation = new Evaluator(runs);
+        evaluation.evaluate();
     }
     
     /**

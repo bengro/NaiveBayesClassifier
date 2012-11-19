@@ -13,6 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -29,11 +36,14 @@ public class Evaluator {
     /**
      * Output all statistics to a file.
      */
-    public void writeToFile() {
+    public void evaluate() {
         try{
             String path = App.outputPath.toString() + "results.txt";
             File file = new File(path);
 
+            String graphTitle = "ROC";
+            XYSeries series = new XYSeries("ROC");
+            
             file.createNewFile();
             FileWriter fstream = new FileWriter(path);
             BufferedWriter out = new BufferedWriter(fstream);
@@ -54,6 +64,7 @@ public class Evaluator {
                 Double precision = (double) tp / (tp + fp);
                 Double recall = (double) tp / (tp + fn);
                 
+                // buffer to write to file/stdout
                 output = output.concat("\nRun " + i + "\n");
                 output = output.concat("------\n");
                 output = output.concat("Training set size: " + trainingSize + "(" + markedAsSpam + " spam, " + markedAsNoSpam + " correct)\n");
@@ -65,16 +76,28 @@ public class Evaluator {
                 output = output.concat("True negatives: " + tn + "\n");
                 output = output.concat("Precision: " + precision + "\n");
                 output = output.concat("Recall: " + recall + "\n");
+                
+                // add plot points: (false positive rate, true positive rate)
+                series.add((double) fp / (tp + fn), (double) tp / (tp + fn));
             }
 
             out.write(output);
             out.close();
             System.out.print(output);
+            System.out.println("Results output to " + path);
+            
+            // draw the graph            
+            final XYChart xyChart = new XYChart(series, graphTitle);
+            xyChart.pack();
+            xyChart.setVisible(true);
+            xyChart.toFront();
+            xyChart.requestFocus();
+            xyChart.setAlwaysOnTop(true);
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     /**
      * @return the runs
      */
@@ -89,4 +112,28 @@ public class Evaluator {
         this.runs = runs;
     }
     
+}
+
+class XYChart extends JFrame {
+    
+    public XYChart(XYSeries series, String title) {
+        
+        final XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(series);
+
+        final JFreeChart chart = ChartFactory.createXYLineChart(
+            title,      // chart title
+            "Recall",                      // x axis label
+            "Precision",                      // y axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL,
+            false,                     // include legend
+            false,                     // tooltips
+            false                     // urls
+        );
+
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        setContentPane(chartPanel);
+    }
 }
