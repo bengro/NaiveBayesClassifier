@@ -4,6 +4,7 @@ import ch.ethz.ir.dreamteam.naivebayesclassifier.classification.Classifier;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.classification.Model;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.Document;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 /**
  * This class is responsible for executing training and testing for a given fold.
@@ -81,17 +82,68 @@ public class Runner {
      */
     public final void runTesting(ArrayList<Document> testDocs) {
         
+        /**
+         * Iterating through all documents in test set.
+         */
         for(Document testDoc : testDocs) {
             
+            double posteriorSumSpam = 0.0;
+            double posteriorSumNoSpam = 0.0;
+            
+            /**
+             * Iterating through all terms of a document.
+             */
+            for(Entry<String, Integer> term : testDoc.getTermFrequencies().entrySet()) {
+                
+                // look up probabilty for term | spam
+                double spamProbTerm = model.getTermProbabilities().get(term.getKey()).getSpamProbability();
+                double logSpamProbTerm = Math.log(spamProbTerm) * term.getValue();
+                posteriorSumSpam = posteriorSumSpam + logSpamProbTerm;
+                
+                // look up probabilty for term | nospam
+                double noSpamProbTerm = model.getTermProbabilities().get(term.getKey()).getNoSpamProbability();
+                double logNoSpamProbTerm = Math.log(noSpamProbTerm) * term.getValue();
+                posteriorSumNoSpam = posteriorSumNoSpam + logNoSpamProbTerm;
+                
+             }
+            
             // our prediction for P(spam|doc)
+            double isSpamProbability = Math.log(model.getSpamPrior()) + posteriorSumSpam;
             
             // our prediction for P(noSpam|doc)
+            double isNoSpamProbability = Math.log(model.getNoSpamPrior()) + posteriorSumNoSpam;
             
             // our final prediction
+            boolean isSpamPrediction;
+            if(isSpamProbability < isNoSpamProbability) {
+                isSpamPrediction = false;
+            } else {
+                isSpamPrediction = true;
+            }
             
             // effective class
-        
-            // add to TP, FP, TN, FN
+            boolean isSpamTruth = testDoc.isSpam();
+            
+            /* add to TP, FP, TN, FN
+            *Truth|Predi| 
+            * ---------------
+            *  0  |  0  | TN
+            *  0  |  1  | FP
+            *  1  |  0  | FN
+            *  1  |  1  | TP
+            */
+            if(isSpamTruth == isSpamPrediction == false) {
+                this.TN++;
+            }
+            if(isSpamTruth == false && isSpamPrediction == true) {
+                this.FP++;
+            }
+            if(isSpamTruth == true && isSpamPrediction == false) {
+                this.FN++;
+            }
+            if(isSpamTruth == isSpamPrediction == true) {
+                this.TP++;
+            }
             
         }
 
