@@ -42,34 +42,34 @@ public class Classifier {
     double noSpamPrior;
     
     /**
-     * Number of training documents. Is double to avoid double-int rounding errors.
+     * Number of training documents.
      */
-    double numberOfTrainingDocs;
+    int numberOfTrainingDocs;
     
     /**
-     * Number of spam documents. Is double to avoid double-int rounding errors.
+     * Number of spam documents.
      */
-    double numberOfSpamDocs = 0.0;
+    private int numberOfSpamDocs = 0;
     
     /**
-     * Number of no-spam documents. Is double to avoid double-int rounding errors.
+     * Number of no-spam documents.
      */
-    double numberOfNoSpamDocs = 0.0;
+    private int numberOfNoSpamDocs = 0;
     
     /**
      * Size of vocabulary.
      */
-    double sizeOfVocabulary = 0.0;
+    int sizeOfVocabulary = 0;
     
     /**
      * Total Number of tokens in spam class.
      */
-    double totalTokensSpam = 0.0;
+    int totalTokensSpam = 0;
     
     /**
      * Total number of tokens in non-spam class.
      */
-    double totalTokensNoSpam = 0.0;
+    int totalTokensNoSpam = 0;
     
     /**
      * The model containing the term probabilities and priors.
@@ -133,11 +133,11 @@ public class Classifier {
         sizeOfVocabulary = termProbabilities.size();
         
         // compute N - number of all documents.
-        numberOfTrainingDocs = (double) trainingDocuments.size();
+        numberOfTrainingDocs = trainingDocuments.size();
         
         // priors
-        spamPrior = this.numberOfSpamDocs / this.numberOfTrainingDocs;
-        noSpamPrior = this.numberOfNoSpamDocs / this.numberOfTrainingDocs;
+        spamPrior = (double) this.getNumberOfSpamDocs() / this.numberOfTrainingDocs;
+        noSpamPrior = (double) this.getNumberOfNoSpamDocs() / this.numberOfTrainingDocs;
         
         // number of tokens in spam, no-spam class respectively.
         for(Integer termFrequency : spamTerms.values()) {
@@ -205,12 +205,26 @@ public class Classifier {
     public void outputStats() {
         System.out.println("Number of Documents: " + this.numberOfTrainingDocs);
         System.out.println("Size of Vocabulary: " + this.sizeOfVocabulary);
-        System.out.println("Number of Spam documents: " + this.numberOfSpamDocs);
-        System.out.println("Number of No-spam documents: " + this.numberOfNoSpamDocs);
+        System.out.println("Number of Spam documents: " + this.getNumberOfSpamDocs());
+        System.out.println("Number of No-spam documents: " + this.getNumberOfNoSpamDocs());
         System.out.println("Number of tokens in spam class: " + this.totalTokensSpam);
         System.out.println("Number of tokens in no-spam class: " + this.totalTokensNoSpam);
         System.out.println("Spam prior: " + this.spamPrior);
         System.out.println("No-spam prior: " + this.noSpamPrior);
+    }
+
+    /**
+     * @return the numberOfSpamDocs
+     */
+    public int getNumberOfSpamDocs() {
+        return numberOfSpamDocs;
+    }
+
+    /**
+     * @return the numberOfNoSpamDocs
+     */
+    public int getNumberOfNoSpamDocs() {
+        return numberOfNoSpamDocs;
     }
 
 }

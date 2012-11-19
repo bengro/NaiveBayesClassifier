@@ -21,6 +21,7 @@ public class App
     public static Path documentDirectory = Paths.get("./resources/IR_Project3_Files");
     public static Path stopwordsPath = Paths.get("./resources/stopwords.txt");
     public static ArrayList<Path> customDirectories = new ArrayList();
+    public static Path outputPath = Paths.get("./output/");
          
     public static void main( String[] args )
     {

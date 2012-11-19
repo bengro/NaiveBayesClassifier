@@ -42,6 +42,15 @@ public class Runner {
      */
     private int FN;
     
+    /**
+     * Number of spams marked in the training phase.
+     */
+    private int numberOfTrainingSpams;
+    
+    /**
+     * Number of non-spam messages marked in the training phase.
+     */
+    private int numberOfTrainingNoSpams;
     
     /**
      * Is called by the CrossValidator and is meant to execute training and testing.
@@ -61,6 +70,8 @@ public class Runner {
     public final void runTraining(ArrayList<Document> trainingDocs) {
         Classifier classifier = new Classifier(trainingDocs);
         this.model = classifier.getModel();
+        this.numberOfTrainingSpams = classifier.getNumberOfSpamDocs();
+        this.numberOfTrainingNoSpams = classifier.getNumberOfNoSpamDocs();
     }
     
     /**
@@ -126,6 +137,20 @@ public class Runner {
      */
     public int getFN() {
         return FN;
+    }
+
+    /**
+     * @return the numberOfTrainingSpams
+     */
+    public int getNumberOfTrainingSpams() {
+        return numberOfTrainingSpams;
+    }
+
+    /**
+     * @return the numberOfTrainingNoSpams
+     */
+    public int getNumberOfTrainingNoSpams() {
+        return numberOfTrainingNoSpams;
     }
     
     
