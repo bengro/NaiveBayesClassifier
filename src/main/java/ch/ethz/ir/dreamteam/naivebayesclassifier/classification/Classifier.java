@@ -1,6 +1,6 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier.classification;
 
-import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Document;
+import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.Document;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;

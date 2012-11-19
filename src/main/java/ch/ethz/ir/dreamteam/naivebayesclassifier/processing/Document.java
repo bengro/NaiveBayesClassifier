@@ -1,4 +1,4 @@
-package ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation;
+package ch.ethz.ir.dreamteam.naivebayesclassifier.processing;
 
 import java.util.HashMap;
 
