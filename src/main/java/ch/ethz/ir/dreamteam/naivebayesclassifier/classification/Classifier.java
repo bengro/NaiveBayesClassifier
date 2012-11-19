@@ -187,7 +187,7 @@ public class Classifier {
             enumerator = 0.0;
         }
         double noSpamPosterior = (enumerator + 1) / (this.totalTokensNoSpam + this.sizeOfVocabulary);
-        predictedClassification.setSpamProbability(noSpamPosterior);
+        predictedClassification.setNoSpamProbability(noSpamPosterior);
         
         return predictedClassification;
     }

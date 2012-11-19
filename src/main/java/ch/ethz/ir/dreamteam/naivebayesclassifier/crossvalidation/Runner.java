@@ -24,22 +24,22 @@ public class Runner {
     private Model model;
     
     /**
-     * True Positives
+     * True Positives.
      */
     private int TP;
     
     /**
-     * True Negatives
+     * True Negatives.
      */
     private int TN;
            
     /**
-     * False Positives
+     * False Positives.
      */
     private int FP;
     
     /**
-     * False Negatives
+     * False Negatives.
      */
     private int FN;
     
@@ -62,6 +62,7 @@ public class Runner {
         
         runTraining(fold.getTrainingDocuments());
         runTesting(fold.getTestDocuments());
+        
     }
     
     /**
@@ -95,8 +96,13 @@ public class Runner {
              */
             for(Entry<String, Integer> term : testDoc.getTermFrequencies().entrySet()) {
                 
+                String testDocTerm = term.getKey();
+                if(!model.getTermProbabilities().containsKey(testDocTerm)) {
+                    continue; // this iteration is being skipped
+                }
+                
                 // look up probabilty for term | spam
-                double spamProbTerm = model.getTermProbabilities().get(term.getKey()).getSpamProbability();
+                double spamProbTerm = model.getTermProbabilities().get(testDocTerm).getSpamProbability();
                 double logSpamProbTerm = Math.log(spamProbTerm) * term.getValue();
                 posteriorSumSpam = posteriorSumSpam + logSpamProbTerm;
                 

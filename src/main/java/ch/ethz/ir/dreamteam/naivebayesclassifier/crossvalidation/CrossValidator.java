@@ -56,7 +56,11 @@ public class CrossValidator {
     public void run() {
         generateFolds();  
         
+        int i = 1;
         for(Fold fold : folds) {
+            System.out.println("Processing fold " + i);
+            i++;
+            
             Runner run = new Runner(fold);
             runs.add(run);
         }

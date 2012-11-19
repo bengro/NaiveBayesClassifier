@@ -96,6 +96,7 @@ public class App
                 }
                 
                 // TODO: Initiate CrossValidation!
+                System.out.println("Model training and testing in progress...");
                 cv.run();
             }
         }
