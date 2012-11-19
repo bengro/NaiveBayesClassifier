@@ -1,5 +1,6 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation;
 
+import ch.ethz.ir.dreamteam.naivebayesclassifier.Evaluator;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.Document;
 import java.util.ArrayList;
 
@@ -59,6 +60,7 @@ public class CrossValidator {
         }
         
         // evaluation either right here or in another class.
+        Evaluator evaluation = new Evaluator(runs);
     }
     
     /**

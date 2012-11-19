@@ -70,12 +70,20 @@ public class Runner {
      */
     public final void runTesting(ArrayList<Document> testDocs) {
         
-        // our prediction
+        for(Document testDoc : testDocs) {
+            
+            // our prediction for P(spam|doc)
+            
+            // our prediction for P(noSpam|doc)
+            
+            // our final prediction
+            
+            // effective class
         
-        // effective class
-        
-        // add to TP, FP, TN, FN
-        
+            // add to TP, FP, TN, FN
+            
+        }
+
     }
     
 }
