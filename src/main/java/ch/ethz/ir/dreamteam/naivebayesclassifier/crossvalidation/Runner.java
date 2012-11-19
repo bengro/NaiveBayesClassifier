@@ -71,11 +71,17 @@ public class Runner {
      */
     public final void runTesting(ArrayList<Document> testDocs) {
         
+        /**
+         * Iterating through all documents in test set.
+         */
         for(Document testDoc : testDocs) {
             
             double posteriorSumSpam = 0.0;
             double posteriorSumNoSpam = 0.0;
             
+            /**
+             * Iterating through all terms of a document.
+             */
             for(Entry<String, Integer> term : testDoc.getTermFrequencies().entrySet()) {
                 
                 // look up probabilty for term | spam
