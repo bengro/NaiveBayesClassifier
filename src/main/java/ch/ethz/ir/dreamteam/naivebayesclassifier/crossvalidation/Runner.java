@@ -86,7 +86,7 @@ public class Runner {
                 // look up probabilty for term | nospam
                 double noSpamProbTerm = model.getTermProbabilities().get(term.getKey()).getNoSpamProbability();
                 double logNoSpamProbTerm = Math.log(noSpamProbTerm) * term.getValue();
-                posteriorSumNoSpam = posteriorSumSpam + logNoSpamProbTerm;
+                posteriorSumNoSpam = posteriorSumNoSpam + logNoSpamProbTerm;
                 
              }
             
@@ -105,8 +105,28 @@ public class Runner {
             }
             
             // effective class
-        
-            // add to TP, FP, TN, FN
+            boolean isSpamTruth = testDoc.isSpam();
+            
+            /* add to TP, FP, TN, FN
+            *Truth|Predi| 
+            * ---------------
+            *  0  |  0  | TN
+            *  0  |  1  | FP
+            *  1  |  0  | FN
+            *  1  |  1  | TP
+            */
+            if(isSpamTruth == isSpamPrediction == false) {
+                this.TN++;
+            }
+            if(isSpamTruth == false && isSpamPrediction == true) {
+                this.FP++;
+            }
+            if(isSpamTruth == true && isSpamPrediction == false) {
+                this.FN++;
+            }
+            if(isSpamTruth == isSpamPrediction == true) {
+                this.TP++;
+            }
             
         }
 
