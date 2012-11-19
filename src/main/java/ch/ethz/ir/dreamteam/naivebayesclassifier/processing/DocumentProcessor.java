@@ -1,6 +1,5 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier.processing;
 
-import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Document;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package ch.ethz.ir.dreamteam.naivebayesclassifier;
 
 import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.CrossValidator;
-import ch.ethz.ir.dreamteam.naivebayesclassifier.crossvalidation.Document;
+import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.Document;
 import ch.ethz.ir.dreamteam.naivebayesclassifier.processing.DocumentProcessor;
 import java.io.File;
 import java.nio.file.Path;
@@ -73,6 +73,7 @@ public class App
                 }
                 
                 // TODO: Initiate CrossValidation!
+                cv.run();
             }
         }
     }
