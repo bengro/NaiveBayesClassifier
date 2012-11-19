@@ -23,10 +23,11 @@ public class CrossValidator {
         
         int sizeBuckets = buckets.size();
         
-        for(int i = 0; i <= sizeBuckets; i++) {
-           
+        for(int i = 0; i < sizeBuckets; i++) {
+            
             // create copy of all buckets
-            ArrayList<ArrayList<Document>> bucketsCopy = buckets;
+            ArrayList<ArrayList<Document>> bucketsCopy = new ArrayList<ArrayList<Document>>();
+            bucketsCopy.addAll(buckets);
             
             // create fold object and take ith bucket as test bucket.
             Fold fold = new Fold();
@@ -34,11 +35,12 @@ public class CrossValidator {
             
             // remove test set from list - only training buckets left.
             bucketsCopy.remove(i);
-            
+
             // iterate over training buckets and store documents in aggregate.
             ArrayList<Document> trainingDocuments = new ArrayList<Document>();
             for(ArrayList<Document> docs : bucketsCopy) {
                 trainingDocuments.addAll(docs);
+                
             }
             fold.setTrainingDocuments(trainingDocuments);
             

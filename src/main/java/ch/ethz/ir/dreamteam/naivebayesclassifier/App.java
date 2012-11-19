@@ -13,7 +13,7 @@ public class App
 {
     public static boolean STOPWORDS = false;
     public static boolean STEMMING = false;
-    
+
     
     // NETBEANS: To set the working dir, do Run > Set Project Configuration > Customize > Run
     public static Path documentDirectory = Paths.get("./resources/IR_Project3_Files");
