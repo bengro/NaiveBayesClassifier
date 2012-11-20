@@ -47,6 +47,8 @@ public class DocumentProcessor {
                     while ((line = reader.readLine()) != null) {
                         termFrequencies.putAll(t.tokenizeLine(line));
                     }
+                    
+                    reader.close();
                 } catch(IOException ex) {
                     System.err.format("IOException: %s%n", ex);
                 }
