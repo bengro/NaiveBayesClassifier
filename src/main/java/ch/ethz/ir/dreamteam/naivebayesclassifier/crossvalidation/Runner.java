@@ -103,12 +103,12 @@ public class Runner {
                 
                 // look up probabilty for term | spam
                 double spamProbTerm = model.getTermProbabilities().get(testDocTerm).getSpamProbability();
-                double logSpamProbTerm = Math.log(spamProbTerm) * term.getValue();
+                double logSpamProbTerm = Math.log(spamProbTerm);
                 posteriorSumSpam = posteriorSumSpam + logSpamProbTerm;
                 
                 // look up probabilty for term | nospam
                 double noSpamProbTerm = model.getTermProbabilities().get(term.getKey()).getNoSpamProbability();
-                double logNoSpamProbTerm = Math.log(noSpamProbTerm) * term.getValue();
+                double logNoSpamProbTerm = Math.log(noSpamProbTerm);
                 posteriorSumNoSpam = posteriorSumNoSpam + logNoSpamProbTerm;
                 
              }
