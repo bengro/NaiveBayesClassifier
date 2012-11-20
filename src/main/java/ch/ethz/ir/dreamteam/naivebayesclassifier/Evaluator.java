@@ -41,7 +41,7 @@ public class Evaluator {
         try{
             String stemming = App.STEMMING ? "_stemming" : "";
             String stopwords = App.STOPWORDS ? "_stopwords" : "";
-            String path = App.outputPath.toString() + "results" + stemming + stopwords + ".txt";
+            String path = App.outputPath.toString() + "/results" + stemming + stopwords + ".txt";
             File file = new File(path);
 
             String graphTitle = "ROC for all Runs";
