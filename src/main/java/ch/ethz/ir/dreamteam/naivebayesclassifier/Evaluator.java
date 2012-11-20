@@ -89,7 +89,7 @@ public class Evaluator {
                 output = output.concat("Recall: " + recall + "\n");
                 
                 // add plot points: (false positive rate, true positive rate)
-                series.add((double) fp / (tn + fn), (double) tp / (tp + fp));
+                series.add((tn + fp > 0) ? (double) fp / (tn + fp) : 0, (tp + fn > 0) ? (double) tp / (tp + fn) : 1);
             }
 
             out.write(output);
