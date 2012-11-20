@@ -34,10 +34,20 @@ public class Evaluator {
      */
     public void evaluate() {
         try{
-            String path = App.outputPath.toString() + "results.txt";
+            String stemming = App.STEMMING ? "_stemming" : "";
+            String stopwords = App.STOPWORDS ? "_stopwords" : "";
+            String path = App.outputPath.toString() + "results" + stemming + stopwords + ".txt";
             File file = new File(path);
 
-            String graphTitle = "ROC";
+            String graphTitle = "ROC Curve for all Tests";
+            if (App.STOPWORDS && !App.STEMMING) {
+                graphTitle += " (Stopwords)";
+            } else if (App.STOPWORDS && App.STEMMING) {
+                graphTitle += " (Stopwords, Stemming)";
+            } else if (!App.STOPWORDS && App.STEMMING) {
+                graphTitle += " (Stemming)";
+            }
+            
             XYSeries series = new XYSeries("ROC Curve for all Tests");
             
             file.createNewFile();
