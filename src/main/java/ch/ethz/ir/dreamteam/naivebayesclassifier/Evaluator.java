@@ -7,13 +7,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -39,7 +44,7 @@ public class Evaluator {
             String path = App.outputPath.toString() + "results" + stemming + stopwords + ".txt";
             File file = new File(path);
 
-            String graphTitle = "ROC Curve for all Tests";
+            String graphTitle = "ROC for all Runs";
             if (App.STOPWORDS && !App.STEMMING) {
                 graphTitle += " (Stopwords)";
             } else if (App.STOPWORDS && App.STEMMING) {
@@ -127,7 +132,7 @@ class XYChart extends JFrame {
         final XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
 
-        final JFreeChart chart = ChartFactory.createXYLineChart(
+        final JFreeChart chart = ChartFactory.createScatterPlot(
             title,      // chart title
             "False Positive Rate",                      // x axis label
             "True Positive Rate",                      // y axis label
@@ -138,6 +143,19 @@ class XYChart extends JFrame {
             false                     // urls
         );
 
+        XYPlot xyPlot = chart.getXYPlot();
+        xyPlot.getDomainAxis().setRange(0, 1);
+        xyPlot.getRangeAxis().setRange(0, 1);
+        
+        List<XYDataItem> dataItems = series.getItems();
+        int i = 1;
+        
+        for (XYDataItem p : dataItems) {
+            XYTextAnnotation xyAnnote = new XYTextAnnotation("Run " + i, p.getXValue(), p.getYValue()-0.05);
+            xyPlot.addAnnotation(xyAnnote);
+            i++;
+        }
+        
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
