@@ -1,0 +1,98 @@
+Results
+-------
+
+Run 1
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 47
+False negatives: 1
+False positives: 8
+True negatives: 233
+Precision: 0.8545454545454545
+Recall: 0.9791666666666666
+
+Run 2
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 47
+False negatives: 1
+False positives: 5
+True negatives: 236
+Precision: 0.9038461538461539
+Recall: 0.9791666666666666
+
+Run 3
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 48
+False negatives: 0
+False positives: 8
+True negatives: 233
+Precision: 0.8571428571428571
+Recall: 1.0
+
+Run 4
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 48
+False negatives: 0
+False positives: 6
+True negatives: 235
+Precision: 0.8888888888888888
+Recall: 1.0
+
+Run 5
+------
+Training set size: 2023 (336 spam, 1687 correct)
+Spam prior: 0.16608996539792387
+Correct prior: 0.8339100346020761
+True positives: 45
+False negatives: 3
+False positives: 0
+True negatives: 242
+Precision: 1.0
+Recall: 0.9375
+
+Run 6
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 48
+False negatives: 0
+False positives: 0
+True negatives: 241
+Precision: 1.0
+Recall: 1.0
+
+Run 7
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 47
+False negatives: 1
+False positives: 3
+True negatives: 238
+Precision: 0.94
+Recall: 0.9791666666666666
+
+Run 8
+------
+Training set size: 2024 (336 spam, 1688 correct)
+Spam prior: 0.16600790513833993
+Correct prior: 0.83399209486166
+True positives: 48
+False negatives: 0
+False positives: 10
+True negatives: 231
+Precision: 0.8275862068965517
+Recall: 1.0

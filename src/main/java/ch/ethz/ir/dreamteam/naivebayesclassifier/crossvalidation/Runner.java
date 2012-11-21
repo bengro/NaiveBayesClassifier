@@ -138,7 +138,7 @@ public class Runner {
             *  1  |  0  | FN
             *  1  |  1  | TP
             */
-            if(isSpamTruth == isSpamPrediction == false) {
+            if(isSpamTruth == false && isSpamPrediction == false) {
                 this.TN++;
             }
             if(isSpamTruth == false && isSpamPrediction == true) {
@@ -147,7 +147,7 @@ public class Runner {
             if(isSpamTruth == true && isSpamPrediction == false) {
                 this.FN++;
             }
-            if(isSpamTruth == isSpamPrediction == true) {
+            if(isSpamTruth == true && isSpamPrediction == true) {
                 this.TP++;
             }
             
